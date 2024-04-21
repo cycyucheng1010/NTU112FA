@@ -19,3 +19,7 @@
     * Theta: 表示隨時間推移期權價格的變化速度
     * Vega: 表示波動率對期權價值的影響
     * Rho: 表示利率變化對期權價值的影響
+
+## Implementation
+![mainpage](./mainpage.png)
+![result](./showResult.png)
