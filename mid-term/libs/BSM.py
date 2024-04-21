@@ -16,7 +16,12 @@ class BlackScholesModel():
         p = self.k * np.exp(-self.r * self.T) * norm.cdf(-self.d2) - self.s0 * norm.cdf(-self.d1)
         return c, p
 
-    # Additional methods (Greeks) below...
+# The term "Greeks" refers to the current exposure of an option to different risks. 
+# The numerical values of Greeks indicate how the price of the option strategy would change when facing various risks. 
+# There are five types of risks, which are Delta, Gamma, Vega, Theta, and Rho. 
+# Each represents exposure to price changes, changes in price change, volatility, time, and risk-free interest rate, respectively.
+
+
     def BSDelta(self):
         cDelta = norm.cdf(self.d1)
         pDelta = norm.cdf(self.d1) - 1

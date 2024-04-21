@@ -3,9 +3,6 @@ from libs import TermStructure
 from PyQt5.QtWidgets import QApplication,QWidget,QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 from PyQt5.QtGui import QIcon,QImage
 import sys
-import warnings
-warnings.filterwarnings('ignore', category=DeprecationWarning)
-
 
 class MyWidget(QWidget):
 
@@ -54,7 +51,6 @@ class MyWidget(QWidget):
         self.layout.addLayout(self.sigma_layout)
         self.layout.addLayout(self.T_layout)
     
-    
     def calculate(self):
         try:
             s0 = float(self.s0_edit.text())
@@ -65,43 +61,41 @@ class MyWidget(QWidget):
 
             term_structure = TermStructure.TermStructure(r)
             bsm = BSM.BlackScholesModel(s0, k, term_structure, sigma, T)
-            price = bsm.BSPrice()
-            delta = bsm.BSDelta()
-            gamma = bsm.BSGamma()
-            vega = bsm.BSVega()
-            theta = bsm.BSTheta()
-            rho = bsm.BSRho()
+            self.price = bsm.BSPrice()
+            self.delta = bsm.BSDelta()
+            self.gamma = bsm.BSGamma()
+            self.vega = bsm.BSVega()
+            self.theta = bsm.BSTheta()
+            self.rho = bsm.BSRho()
 
-            result_msg = (f"1. Call Price: {price[0]:.2f}, Put Price: {price[1]:.2f}\n"
-                          f"2. Call Delta: {delta[0]:.3f}, Put Delta: {delta[1]:.3f}\n"
-                          f"3. Gamma: {gamma:.3f}\n"
-                          f"4. Vega: {vega:.3f}\n"
-                          f"5. Call Theta: {theta[0]:.3f}, Put Theta: {theta[1]:.3f}\n"
-                          f"6. Call Rho: {rho[0]:.3f}, Put Rho: {rho[1]:.3f}")
+            result_msg = (f"1. Call Price: {self.price[0]:.2f}, Put Price: {self.price[1]:.2f}\n"
+                          f"2. Call Delta: {self.delta[0]:.3f}, Put Delta: {self.delta[1]:.3f}\n"
+                          f"3. Gamma: {self.gamma:.3f}\n"
+                          f"4. Vega: {self.vega:.3f}\n"
+                          f"5. Call Theta: {self.theta[0]:.3f}, Put Theta: {self.theta[1]:.3f}\n"
+                          f"6. Call Rho: {self.rho[0]:.3f}, Put Rho: {self.rho[1]:.3f}")
             QMessageBox.information(self, 'Result', result_msg)
+            self.terminalShow()
         except ValueError:
+            print('Error','Please input valid numbers.')
             QMessageBox.warning(self, 'Error', 'Please input valid numbers.')
 
-# Example Usage
+    def terminalShow(self):
+        print("Call Price:", self.price[0])
+        print("Put Price:", self.price[0])
 
-# term_structure = TermStructure.TermStructure(base_rate=0.05)  # 5% base annual interest rate
-# bsm = BSM.BlackScholesModel(s0=90, k=100, term_structure=term_structure, sigma=0.1, T=5)  # 5-year maturity
+        print('put delta:',self.delta[0])
+        print('call delta:',self.delta[1])
 
-# print("Call Price:", bsm.BSPrice()[0])
-# print("Put Price:", bsm.BSPrice()[1])
+        print('gamma:',self.gamma)
 
-# print('put delta:',bsm.BSDelta()[0])
-# print('call delta:',bsm.BSDelta()[1])
+        print("Vega:",self.vega)
 
-# print('gamma:',bsm.BSGamma())
+        print("call Theta",self.theta[0])
+        print("put Theta",self.theta[1])
 
-# print("Vega:",bsm.BSVega())
-
-# print("call Theta",bsm.BSTheta()[0])
-# print("put Theta",bsm.BSTheta()[1])
-
-# print("call Rho",bsm.BSRho()[0])
-# print("put Rho",bsm.BSRho()[1])
+        print("call Rho",self.rho[0])
+        print("put Rho",self.rho[1])
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
