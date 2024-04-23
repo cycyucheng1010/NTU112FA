@@ -1,4 +1,4 @@
-# Mid term
+# Black-Scholes with Python OOP 
 ## Introduction
 * 此專案參考具有權威性的Black-Sholes Model來進行實作，透過使用Python Object-Oriented Programing 的方式去進行金融模型的模擬與視窗程式實現，此外為了方便測試亦編成一執行檔讓使用者可以在任何環境下皆能執行。
 ### Black-Scholes Model:
