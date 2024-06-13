@@ -1,5 +1,5 @@
 #   Option Risk Capital Calculator Based on Basel III Using QuantLib Python
-NTNU 61247014S陳昱誠
+NTNU 61247014S陳昱誠、NTU R12723057 王智鵬
 ## Introduction
 * 此專案根據巴塞爾協議III(Basel III)來進行選擇權風險技術之視窗工具，透過使用Python Object-Oriented Programing以及QunatLib Python的方式去進行金融模型的模擬與視窗程式實現，此外為了方便測試亦編成一執行檔讓使用者可以在任何環境下皆能執行。
 
